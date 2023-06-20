@@ -24,17 +24,16 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <>
-      <MenuItem
-        active={selected === title}
-        style={{ color: colors.grey[100] }}
-        onClick={() => setSelected(title)}
-        icon={icon}
-      >
-        <Typography>{title}</Typography>
-      </MenuItem>
-      <Link to={to} />
-    </>
+    <MenuItem
+      active={selected === title}
+      style={{ color: colors.grey[100] }}
+      onClick={() => setSelected(title)}
+      icon={icon}
+      component={<Link to={to} />}
+      sx={{ color: "red" }}
+    >
+      <Typography>{title}</Typography>
+    </MenuItem>
   );
 };
 
@@ -53,18 +52,23 @@ const SidebarComponent = () => {
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
         },
-        "& .pro-inner-item": {
+        "& .ps-menu-button": {
           padding: "5px 35px 5px 20px !important",
         },
-        "& .pro-inner-item:hover": {
+        "& .ps-menu-button:hover": {
           color: "#868dfb !important",
+          backgroundColor: "transparent !important",
         },
-        " & .pro-menu-item.active": {
+        " & .ps-active": {
           color: "#6870fa !important",
         },
       }}
     >
-      <Sidebar collapsed={isCollapsed}>
+      <Sidebar
+        collapsed={isCollapsed}
+        backgroundColor="#1f2a40"
+        rootStyles={{ border: "none" }}
+      >
         <Menu IconShape="square">
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
